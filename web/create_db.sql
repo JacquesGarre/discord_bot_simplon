@@ -1,0 +1,38 @@
+CREATE TABLE IF NOT EXISTS `users` (
+   `pseudo` varchar(255) NOT NULL,
+   `retard` int(11) NOT NULL,
+   `riz` int(11) NOT NULL,
+   `cafe_senseo` int(11) NOT NULL,
+   `cafe_filtre` int(11) NOT NULL,
+   `the` int(11) NOT NULL,
+   `eponge` int(11) NOT NULL,
+   `liquide_vaiselle` int(11) NOT NULL,
+   `torchons` int(11) NOT NULL,
+   `micro_ondes` int(11) NOT NULL
+   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `users` (`pseudo`, `retard`, `riz`, `cafe_senseo`, `cafe_filtre`, `the`, `eponge`, `liquide_vaiselle`, `torchons`, `micro_ondes`) VALUES
+    ('20.100.', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('Adeline', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('Attila Kaya', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('charles', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('Clément', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('Clément B', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('Colombe', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('Damos (Damien)', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('Emilie', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('Fakhredine', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('Guillaume', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('jaks', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('Jason', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('Mickael', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('Nicolas.Duval', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('Quentin', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('Samuel', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('Simon', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('Thibaut', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('Dino', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('karima', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('Nicolas Plumet', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('Pierre Epron', 0, 0, 0, 0, 0, 0, 0, 0, 0),
+    ('reem', 0, 0, 0, 0, 0, 0, 0, 0, 0);
+COMMIT;

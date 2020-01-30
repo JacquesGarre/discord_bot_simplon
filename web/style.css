@@ -1,0 +1,8 @@
+thead { 
+    overflow-y: auto; 
+    height: 100px; 
+}
+thead th { 
+    position: sticky;
+    top: 0; 
+}
