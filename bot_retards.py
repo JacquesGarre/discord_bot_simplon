@@ -110,7 +110,7 @@ def int_format(value):
     return value
 
 def get_pseudo(message):
-    return message.mentions[0].name
+    return message.mentions[0].nick
 
 def show_commands():
     response = "\n\n\n"
@@ -139,7 +139,9 @@ async def bot_retards_function(message):
         await message.channel.send(response)
     elif "@" in message.content:
         pseudo = get_pseudo(message)
+        message.content.replace(pseudo, '')
         parts = message.content.split(" ")
+        print(pseudo)
         mention = parts[0]
         verb = parts[1]
         mot = parts[2]
