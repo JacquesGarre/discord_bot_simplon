@@ -9,6 +9,7 @@ load_dotenv()
 verbs = {
     'a_apporté' : ['riz', 'cafe_senseo', 'cafe_filtre','the','eponge','liquide_vaiselle'], 
     'est_en' : ['retard'], 
+    'a_pris' : ['clef'], 
     'a_lavé' : ['torchons','micro_ondes']
 }
 
@@ -34,6 +35,7 @@ def help():
         help_message += '**!version**: *Retourne la version*\n'
     help_message += '**!liste**: *Retourne la liste des apprenants*\n'
     help_message += '**!cmd**: *Retourne la liste des commandes*\n'
+    help_message += '**!clef**: *Retourne le nom de la personne qui possède la clef de la salle*\n'
     return help_message
 
 async def show_list(message):
@@ -63,8 +65,28 @@ def show_commands():
     response += "\nExemples : @bob a_apporté cafe_senseo, @john a_lavé torchons"
     return response
 
+def show_clef():
+    db = db_connect()
+    cursor = db.cursor()
+    cursor.execute("SELECT pseudo FROM users WHERE clef='1'")
+    value = cursor.fetchone()[0] 
+    response = "Actuellement, c'est {} qui possède la clef de la salle.".format(value)
+    return response
+
+def set_clef(pseudo):
+    db = db_connect()
+    cursor = db.cursor()
+    cursor.execute("SELECT pseudo FROM users WHERE clef=1")
+    value = cursor.fetchone()[0] 
+    cursor.execute("UPDATE users SET clef = '0' WHERE pseudo='" + value + "'")
+    cursor.execute("UPDATE users SET clef = '1' WHERE pseudo='" + pseudo + "'")
+    db.commit()
+    cursor.close()
+    db.close()
+    return response
+
 async def bot_retards_function(message):
-    if message.channel.id == os.getenv('CHANNEL_ID'):
+    if message.channel.id == int(os.getenv('CHANNEL_ID')):
         if message.content == "!version":
             response = version()
             await message.channel.send(response)
@@ -76,6 +98,9 @@ async def bot_retards_function(message):
             await message.channel.send(response)
         elif message.content == "!liste":
             await show_list(message)
+        elif message.content == "!clef":
+            response = show_clef()
+            await message.channel.send(response)
         elif message.content == "!cmd":
             response = show_commands()
             await message.channel.send(response)
@@ -87,7 +112,7 @@ async def bot_retards_function(message):
             mention = parts[0]
             verb = parts[1]
             mot = parts[2]
-            if verb in verbs.keys() and mot in verbs[verb]:
+            if verb != "a_pris" and verb in verbs.keys() and mot in verbs[verb]:
                 await message.channel.send("Ok, je note ça!")
                 print("mot", mot)
                 print("verb", verb)
@@ -113,5 +138,8 @@ async def bot_retards_function(message):
                 cursor.close()
                 db.close()
                 print(cursor.rowcount, "record(s) affected")
-            elif verb in verbs.keys():
+            elif verb != "a_pris" and verb in verbs.keys():
                 await message.channel.send("Je n'ai pas compris, êtes-vous sûr que l'expression est correcte? Tapez '!cmd' pour en savoir plus.")
+            elif verb == "a_pris" and mot == "clef":
+                await message.channel.send("C'est noté! :thumbsup:")
+                set_clef(pseudo)
